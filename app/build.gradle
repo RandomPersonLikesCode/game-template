@@ -1,0 +1,111 @@
+plugins {
+  id "com.android.application"
+}
+
+def libRoot = "../third_party/lib"
+
+def localProps = rootProject.file("local.properties")
+def props = new Properties()
+
+if (localProps.exists()) {
+  props.load(new FileInputStream(localProps))
+}
+
+android {
+  namespace "org.rplc.game_template"
+  compileSdk 36
+
+  ndkVersion "29.0.14206865"
+
+  defaultConfig {
+    applicationId "org.rplc.game_template"
+
+    minSdk 26
+    targetSdk 35
+
+    versionName "0.0.1"
+    versionCode 1
+  }
+
+  signingConfigs {
+    release {
+      if (localProps.exists()) {
+        storeFile file(props["store_file"])
+        storePassword props["store_pass"]
+        keyAlias props["key_alias"]
+        keyPassword props["key_pass"]
+      }
+    }
+  }
+
+  buildTypes {
+    debug {
+      debuggable true
+    }
+
+    release {
+      minifyEnabled true
+      shrinkResources true
+
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.txt"
+      )
+
+      signingConfig signingConfigs.release
+    }
+  }
+
+  sourceSets {
+    main {
+      assets.srcDirs = ["./src/main/assets"]
+      jniLibs.srcDirs = [libRoot]
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+}
+
+tasks.register("copyNativeLibs") {
+  doLast {
+    configurations.natives.files.each { jar ->
+      def out = null
+
+      if (jar.name.endsWith("natives-armeabi-v7a.jar")) {
+        out = file("$libRoot/armeabi-v7a")
+      }
+      
+      if (jar.name.endsWith("natives-arm64-v8a.jar")) {
+        out = file("$libRoot/arm64-v8a")
+      }
+
+      if (out != null) {
+        out.mkdirs()
+
+        copy {
+          from zipTree(jar)
+          into out
+          include "**/*.so"
+        }
+      }
+    }
+  }
+}
+
+tasks.named("preBuild").configure {
+  dependsOn("copyNativeLibs")
+}
+
+configurations {
+  natives
+}
+
+dependencies {
+  implementation "com.badlogicgames.gdx:gdx:$gdxVersion"
+  implementation "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+  natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+  natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
+}

@@ -1,0 +1,3 @@
+-verbose
+
+-dontwarn com.badlogic.gdx.backends.android.AndroidFragmentApplication
