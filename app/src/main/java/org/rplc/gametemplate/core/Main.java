@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
-package org.rplc.game_template.core;
+
+package org.rplc.gametemplate.core;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;

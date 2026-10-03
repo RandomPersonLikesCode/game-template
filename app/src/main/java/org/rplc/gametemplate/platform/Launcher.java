@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
-package org.rplc.game_template.platform;
+
+package org.rplc.gametemplate.platform;
 
 import android.os.Bundle;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import org.rplc.game_template.core.Main;
+import org.rplc.gametemplate.core.Main;
 
 public class Launcher extends AndroidApplication {
   @Override

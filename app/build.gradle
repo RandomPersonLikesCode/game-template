@@ -12,13 +12,13 @@ if (localProps.exists()) {
 }
 
 android {
-  namespace "org.rplc.game_template"
+  namespace "org.rplc.gametemplate"
   compileSdk 36
 
   ndkVersion "29.0.14206865"
 
   defaultConfig {
-    applicationId "org.rplc.game_template"
+    applicationId "org.rplc.gametemplate"
 
     minSdk 26
     targetSdk 35
