@@ -8,10 +8,12 @@ find_library("log" "log")
 add_library("main" SHARED
   # Main
   "platform/main.cc"
-  "core/display.cc"
+  "platform/display.cc"
+  "platform/event_handler.cc"
   "core/game.cc"
 
-  "core/display.hh"
+  "platform/display.hh"
+  "platform/event_handler.hh"
   "core/game.hh"
 
   # Third-party

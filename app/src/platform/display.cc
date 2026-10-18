@@ -4,7 +4,7 @@
 
 #include <SDL3/SDL.h>
 
-bool Core::Display::create() {
+bool Platform::Display::create() {
   SDL_SetHint(SDL_HINT_ANDROID_TRAP_BACK_BUTTON, "1");
   SDL_SetHint(SDL_HINT_ORIENTATIONS, "LandscapeLeft LandscapeRight");
 
@@ -44,7 +44,7 @@ bool Core::Display::create() {
   return true;
 }
 
-void Core::Display::destroy() {
+void Platform::Display::destroy() {
   SDL_GL_MakeCurrent(nullptr, nullptr);
 
   SDL_GL_DestroyContext(context);

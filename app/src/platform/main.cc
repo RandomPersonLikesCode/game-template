@@ -1,14 +1,17 @@
 // SPDX-License-Identifier: MIT
 
-#include "../core/display.hh"
 #include "../core/game.hh"
+#include "./display.hh"
+#include "./event_handler.hh"
 
-#include <GLES3/gl32.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 
 int main(int argc, char **argv) {
-  Core::Display dp = {};
+  (void)argc;
+  (void)argv;
+
+  Platform::Display dp = {};
   dp.props.title = "Game Template";
   dp.props.width = 800;
   dp.props.height = 600;
@@ -24,22 +27,15 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  bool is_running = true;
-  while (is_running) {
-    SDL_Event events = {};
+  Platform::EventHandler event_handler = {};
 
-    while (SDL_PollEvent(&events)) {
-      switch (events.type) {
-        case SDL_EVENT_QUIT:
-          is_running = false;
-
-          break;
-      }
+  while (event_handler.is_running) {
+    while (SDL_PollEvent(&event_handler.events)) {
+      event_handler.handle_events();
     }
 
     if (!Core::Game::update()) {
-      Core::Game::destroy();
-      dp.destroy();
+      event_handler.is_running = false;
       return 1;
     }
 

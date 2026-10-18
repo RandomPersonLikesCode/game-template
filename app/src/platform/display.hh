@@ -4,7 +4,7 @@
 
 #include <SDL3/SDL.h>
 
-namespace Core {
+namespace Platform {
   struct Display {
     SDL_Window *window;
     SDL_GLContext context;
@@ -23,4 +23,4 @@ namespace Core {
     bool create();
     void destroy();
   };
-} // namespace Core
+} // namespace Platform

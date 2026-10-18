@@ -6,7 +6,7 @@
 
 bool Core::Game::create(int width, int height) {
   glViewport(0, 0, width, height);
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  glClearColor(0.52f, 0.8f, 0.92f, 1.0f);
 
   return true;
 }
@@ -17,4 +17,4 @@ bool Core::Game::update() {
   return true;
 }
 
-void Core::Game::destroy() {}
+void Core::Game::destroy() {};
