@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 
 #include "../core/display.hh"
-#include "sokol_gfx.h"
 
 #include <GLES3/gl32.h>
 #include <SDL3/SDL.h>
@@ -18,18 +17,8 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  sg_desc desc = {};
-  desc.environment.defaults.depth_format = SG_PIXELFORMAT_DEPTH;
-
-  sg_setup(&desc);
-
-  sg_pass pass = {};
-  pass.swapchain.width = dp.props.width_px;
-  pass.swapchain.height = dp.props.height_px;
-  pass.swapchain.depth_format = SG_PIXELFORMAT_DEPTH;
-
-  pass.action.colors[0].load_action = SG_LOADACTION_CLEAR;
-  pass.action.colors[0].clear_value = {0.0f, 0.0f, 1.0f, 0.0f};
+  glViewport(0, 0, dp.props.width_px, dp.props.height_px);
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
   bool is_running = true;
   while (is_running) {
@@ -43,15 +32,11 @@ int main(int argc, char **argv) {
           break;
       }
     }
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    sg_begin_pass(&pass);
-    sg_end_pass();
-
-    sg_commit();
     SDL_GL_SwapWindow(dp.window);
   }
 
-  sg_shutdown();
   dp.destroy();
   return 0;
 }

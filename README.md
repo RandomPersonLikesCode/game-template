@@ -1,8 +1,7 @@
 # Game Template
 ## About
 
-A basic structure template to create a game in C++,
-sokol gfx, SDL, and others.
+A basic structure template to create a game in C++, OpenGL ES, SDL, and others.
 
 ### Prerequisites
 

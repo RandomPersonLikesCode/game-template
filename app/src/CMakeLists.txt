@@ -13,9 +13,6 @@ add_library("main" SHARED
   "core/display.hh"
 
   # Third-party
-  "../../third_party/impl.cc"
-
-  "../../third_party/include/sokol_gfx.h"
 )
 
 set_target_properties("main" PROPERTIES
