@@ -1,0 +1,6 @@
+build/
+.cache/
+
+*.p12
+
+compile_commands.json
