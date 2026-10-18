@@ -9,8 +9,10 @@ add_library("main" SHARED
   # Main
   "platform/main.cc"
   "core/display.cc"
+  "core/game.cc"
 
   "core/display.hh"
+  "core/game.hh"
 
   # Third-party
 )

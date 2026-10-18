@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "../core/display.hh"
+#include "../core/game.hh"
 
 #include <GLES3/gl32.h>
 #include <SDL3/SDL.h>
@@ -17,8 +18,11 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  glViewport(0, 0, dp.props.width_px, dp.props.height_px);
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  if (!Core::Game::create(dp.props.width_px, dp.props.height_px)) {
+    Core::Game::destroy();
+    dp.destroy();
+    return 1;
+  }
 
   bool is_running = true;
   while (is_running) {
@@ -32,11 +36,17 @@ int main(int argc, char **argv) {
           break;
       }
     }
-    glClear(GL_COLOR_BUFFER_BIT);
+
+    if (!Core::Game::update()) {
+      Core::Game::destroy();
+      dp.destroy();
+      return 1;
+    }
 
     SDL_GL_SwapWindow(dp.window);
   }
 
+  Core::Game::destroy();
   dp.destroy();
   return 0;
 }
