@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
   }
 
   glViewport(0, 0, dp.props.width_px, dp.props.height_px);
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 
   bool is_running = true;
   while (is_running) {

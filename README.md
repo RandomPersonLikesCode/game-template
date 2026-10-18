@@ -1,8 +1,8 @@
-# OpenGL ES x SDL3 Template
+# Game Template
 ## About
 
-A basic OpenGL ES and SDL3 template project in C++ to get
-started in graphics programming.
+A basic structure template to create a game in C++,
+sokol gfx, SDL, and others.
 
 ### Prerequisites
 

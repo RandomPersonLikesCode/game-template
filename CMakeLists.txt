@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION "3.24")
-project("gles-template" VERSION "0.0.1" LANGUAGES CXX)
+project("game-template" VERSION "0.0.1" LANGUAGES CXX)
 
 include("FetchContent")
 
