@@ -4,7 +4,7 @@
 
 #include <SDL3/SDL.h>
 
-bool Core::Display::create(Display &dp) {
+bool Core::Display::create() {
   SDL_SetHint(SDL_HINT_ANDROID_TRAP_BACK_BUTTON, "1");
   SDL_SetHint(SDL_HINT_ORIENTATIONS, "LandscapeLeft LandscapeRight");
 
@@ -18,39 +18,36 @@ bool Core::Display::create(Display &dp) {
     return false;
   }
 
-  dp.window =
-      SDL_CreateWindow(dp.props.title, dp.props.width, dp.props.height,
-                       SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
+  window = SDL_CreateWindow(props.title, props.width, props.height,
+                            SDL_WINDOW_FULLSCREEN | SDL_WINDOW_OPENGL);
 
-  if (!dp.window) {
+  if (!window) {
     return false;
   }
 
-  dp.context = SDL_GL_CreateContext(dp.window);
+  context = SDL_GL_CreateContext(window);
 
-  if (!dp.context) {
+  if (!context) {
     return false;
   }
 
-  SDL_GL_MakeCurrent(dp.window, dp.context);
+  SDL_GL_MakeCurrent(window, context);
   SDL_GL_SetSwapInterval(1);
 
-  SDL_GetWindowSize(dp.window, &dp.props.width, &dp.props.height);
+  SDL_GetWindowSize(window, &props.width, &props.height);
 
-  SDL_GetWindowSizeInPixels(dp.window, &dp.props.width_px,
-                            &dp.props.height_px);
+  SDL_GetWindowSizeInPixels(window, &props.width_px, &props.height_px);
 
-  dp.props.aspect_ratio =
-      static_cast<float>(dp.props.width) / dp.props.height;
-  dp.props.scaling = SDL_GetDisplayContentScale(SDL_GetPrimaryDisplay());
+  props.aspect_ratio = static_cast<float>(props.width) / props.height;
+  props.scaling = SDL_GetDisplayContentScale(SDL_GetPrimaryDisplay());
 
   return true;
 }
 
-void Core::Display::destroy(Display &dp) {
+void Core::Display::destroy() {
   SDL_GL_MakeCurrent(nullptr, nullptr);
 
-  SDL_GL_DestroyContext(dp.context);
-  SDL_DestroyWindow(dp.window);
+  SDL_GL_DestroyContext(context);
+  SDL_DestroyWindow(window);
   SDL_Quit();
 }
