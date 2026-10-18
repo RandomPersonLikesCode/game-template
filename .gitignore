@@ -1,6 +1,8 @@
 build/
 .cache/
+CMakeFiles/
 
 *.p12
 
 compile_commands.json
+CMakeCache.txt
