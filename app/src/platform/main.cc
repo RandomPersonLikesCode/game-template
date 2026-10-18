@@ -8,9 +8,9 @@
 
 int main(int argc, char **argv) {
   Core::Display dp = {};
-  dp.props.title   = "GLES Template";
-  dp.props.width   = 800;
-  dp.props.height  = 600;
+  dp.props.title = "GLES Template";
+  dp.props.width = 800;
+  dp.props.height = 600;
 
   if (!Core::Display::create(dp)) {
     Core::Display::destroy(dp);
