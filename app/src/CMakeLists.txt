@@ -6,10 +6,16 @@ find_library("gles" "GLESv3")
 find_library("log" "log")
 
 add_library("main" SHARED
+  # Main
   "platform/main.cc"
   "core/display.cc"
 
   "core/display.hh"
+
+  # Third-party
+  "../../third_party/impl.cc"
+
+  "../../third_party/include/sokol_gfx.h"
 )
 
 set_target_properties("main" PROPERTIES
